@@ -9,4 +9,7 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
 $config = require __DIR__ . '/../config/web.php';
 
+//add global helper functions
+require __DIR__ . '/../helpers/helper.php';
+
 (new yii\web\Application($config))->run();
