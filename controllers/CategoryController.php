@@ -21,6 +21,7 @@ class CategoryController extends AppController {
             $products = [];
         }
         
+        $this->setMeta('E-SHOPPER | ' . $category->name, $category->keywords, $category->description);
             
         // pr ($category);
         
@@ -29,11 +30,12 @@ class CategoryController extends AppController {
     
     public function actionIndex () {
         $hits = Product::find()
-            ->where(['hit' => '1'])
-            ->limit(6)
-            ->asArray()
-            ->all();
+        ->where(['hit' => '1'])
+        ->limit(6)
+        ->asArray()
+        ->all();
             
+        $this->setMeta('E-SHOPPER');
         // pr ($hits);
         
         return $this->render('index', compact('hits'));
