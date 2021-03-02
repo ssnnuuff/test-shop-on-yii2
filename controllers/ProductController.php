@@ -5,24 +5,24 @@ namespace app\controllers;
 use Yii;
 use app\models\Category;
 use app\models\Product;
+use yii\web\HttpException;
 
 class ProductController extends AppController {
     
     public function actionView ($id) {
         $id = Yii::$app->request->get('id');
         
-        if ($id) {
-            $product = Product::findOne((int)$id);
-        } else {
-            $product = [];
+        $product = Product::findOne((int)$id);
+        
+        if (empty($product)) {
+            throw new HttpException(404, 'Данного товара не существует.');
         }
             
         $hits = Product::find()
         ->where(['hit' => '1'])
-        // ->limit(6)
         ->asArray()
         ->all();
-        // pr ($product);
+        
         
         $this->setMeta('E-SHOPPER | ' . $product->name, $product->keywords, $product->description);
         
