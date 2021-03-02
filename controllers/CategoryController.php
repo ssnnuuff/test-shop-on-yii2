@@ -39,7 +39,7 @@ class CategoryController extends AppController {
     public function actionIndex () {
         $hits = Product::find()
         ->where(['hit' => '1'])
-        ->limit(6)
+        // ->limit(6)
         ->asArray()
         ->all();
             

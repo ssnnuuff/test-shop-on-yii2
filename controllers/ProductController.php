@@ -17,9 +17,16 @@ class ProductController extends AppController {
             $product = [];
         }
             
+        $hits = Product::find()
+        ->where(['hit' => '1'])
+        // ->limit(6)
+        ->asArray()
+        ->all();
         // pr ($product);
         
-        return $this->render('view', compact(['product']));
+        $this->setMeta('E-SHOPPER | ' . $product->name, $product->keywords, $product->description);
+        
+        return $this->render('view', compact(['product', 'hits']));
     }
     
 }
