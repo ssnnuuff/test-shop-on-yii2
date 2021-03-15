@@ -10,7 +10,6 @@ use yii\web\HttpException;
 class ProductController extends AppController {
     
     public function actionView ($id) {
-        $id = Yii::$app->request->get('id');
         
         $product = Product::findOne((int)$id);
         

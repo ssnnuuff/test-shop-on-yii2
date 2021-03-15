@@ -116,6 +116,10 @@ use \yii\helpers\Url;
                                 <b>Brand:</b> 
                                 <a href="<?= Url::to(['category/view', 'id' => $product->category->id]) ?>"><?= $product->category->name ?></a>
                             </p>
+                            <p>
+                                <b>Описание:</b> 
+                                <?= $product->content ?>
+                            </p>
                             <a href=""><img src="/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                         </div><!--/product-information-->
                     </div>

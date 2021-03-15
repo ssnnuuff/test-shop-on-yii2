@@ -9,9 +9,20 @@ use yii\data\Pagination;
 use yii\web\HttpException;
 
 class CategoryController extends AppController {
+        
+    public function actionIndex () {
+        $hits = Product::find()
+        ->where(['hit' => '1'])
+        ->asArray()
+        ->all();
+            
+        $this->setMeta('E-SHOPPER');
+        
+        
+        return $this->render('index', compact('hits'));
+    }
     
     public function actionView ($id) {
-        $id = Yii::$app->request->get('id');
         
         $category = Category::findOne((int)$id);
         
@@ -36,16 +47,25 @@ class CategoryController extends AppController {
         return $this->render('view', compact(['products', 'category','pages']));
     }
     
-    public function actionIndex () {
-        $hits = Product::find()
-        ->where(['hit' => '1'])
-        ->asArray()
-        ->all();
-            
-        $this->setMeta('E-SHOPPER');
+    public function actionSearch () {
+        
+        $q = trim(Yii::$app->request->get('q'));
+        
+        if ($q){
+            $query = Product::find()
+            ->where(['or', ['like', 'name', $q], ['like', 'content', $q]]);
+            $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'forcePageParam' => false, 'pageSizeParam' => false]);
+            $products = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->asArray()
+            ->all();
+        }
         
         
-        return $this->render('index', compact('hits'));
+        $this->setMeta('E-SHOPPER | Поиск: ' . $q, 'Поиск товаров', 'Поиск товаров');
+        
+        
+        return $this->render('search', compact(['products', 'pages', 'q']));
     }
-    
+
 }
