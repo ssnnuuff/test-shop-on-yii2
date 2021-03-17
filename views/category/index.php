@@ -4,7 +4,7 @@
 
 use app\components\MenuWidget;
 use yii\helpers\Html;
-use \yii\helpers\Url;
+use yii\helpers\Url;
 
 
 ?>
@@ -132,7 +132,7 @@ use \yii\helpers\Url;
                                                     <?= $hit['name'] ?>        
                                                 </a>
                                             </p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<a href="" data-id="<?= $hit['id'] ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 										</div>
                                         <?php if ($hit['new']): ?>
                                             <?= Html::img('@web/images/home/new.png', ['class' => 'new'])?>

@@ -5,7 +5,7 @@
 use app\components\MenuWidget;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-use \yii\helpers\Url;
+use yii\helpers\Url;
 
 ?>
 

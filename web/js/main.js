@@ -1,9 +1,89 @@
+
+
 /*price range*/
 
  $('#sl2').slider();
  
     $('.catalog').dcAccordion({
         speed: 300
+    });
+    
+    function showCart (cart) {
+        $('#cart .modal-body').html(cart);
+        $('#cart').modal('show');
+    }
+    
+    function clearCart () {
+        $.ajax({
+            url: '/cart/clear',
+            type: 'GET',
+            success: function(res) {
+                if (!res) {
+                    alert ('Ошибка');
+                } 
+                showCart(res);
+            },
+            error: function() {
+                alert('Error!');
+            }
+        });
+    }
+    
+    function addToCart (id) {
+        $.ajax({
+            url: '/cart/add',
+            data: {id: id},
+            type: 'GET',
+            success: function(res) {
+                if (!res) {
+                    alert ('Ошибка');
+                } 
+                showCart(res);
+            },
+            error: function() {
+                alert('Error!');
+            }
+        });
+    }
+    
+    function delFromCart (id, count=1) {
+        $.ajax({
+            url: '/cart/del',
+            data: {id: id, count: count},
+            type: 'GET',
+            success: function(res) {
+                if (!res) {
+                    alert ('Ошибка');
+                } 
+                showCart(res);
+            },
+            error: function() {
+                alert('Error!');
+            }
+        });
+    }
+    
+    $('.add-to-cart').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        addToCart(id);
+    });
+    
+    $('.show-cart').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/cart/show',
+            type: 'GET',
+            success: function(res) {
+                if (!res) {
+                    alert ('Ошибка');
+                } 
+                showCart(res);
+            },
+            error: function() {
+                alert('Error!');
+            }
+        });
     });
 
 	var RGBChange = function() {
