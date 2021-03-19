@@ -29,16 +29,17 @@
         });
     }
     
-    function addToCart (id) {
+    function addToCart (id, count=1) {
         $.ajax({
             url: '/cart/add',
-            data: {id: id},
+            data: {id: id, count: count},
             type: 'GET',
             success: function(res) {
                 if (!res) {
                     alert ('Ошибка');
                 } 
                 showCart(res);
+                // console.log(res);
             },
             error: function() {
                 alert('Error!');
@@ -65,8 +66,9 @@
     
     $('.add-to-cart').on('click', function (e) {
         e.preventDefault();
-        var id = $(this).data('id');
-        addToCart(id);
+        var id = $(this).data('id'), 
+            count = $('#product-count').val();
+        addToCart(id, count);
     });
     
     $('.show-cart').on('click', function (e) {

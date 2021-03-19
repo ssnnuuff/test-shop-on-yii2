@@ -20,26 +20,23 @@ use yii\helpers\Url;
                 <?php foreach ($session['cart'] as $key=>$product): ?>
                 <?php if ($key != 'total_count' AND $key != 'total_price'): ?>
                 <tr>
-                    <td class="cart_product">
-                        <a href="<?= Url::to(['product/view', 'id' => $key]) ?>"><?= Html::img('@web/images/products/' . $product['img'], ['alt' => $product['name']]) ?></a>
+                    <td>
+                        <a href="<?= Url::to(['product/view', 'id' => $key]) ?>"><?= Html::img('@web/images/products/' . $product['img'], ['alt' => $product['name'], 'height' => 50]) ?></a>
                     </td>
-                    <td class="cart_description">
+                    <td>
                         <h4><a href="<?= Url::to(['product/view', 'id' => $key]) ?>"><?= $product['name'] ?></a></h4>
                     </td>
                     <td class="cart_price">
                         <p>$<?= $product['price'] ?></p>
                     </td>
-                    <td class="cart_quantity">
-                        <div class="cart_quantity_button">
-                            <!--a href="" class="cart_quantity_up" data-id="<?= $key ?>" onclick="addToCart"> + </a-->
-                            <button type="button" class="btn btn-default" aria-label="Left Align" onclick="addToCart(<?= $key ?>)">
+                    <td style="width:150px;">
+                            <button type="button" class="btn btn-default" aria-label="Left Align" onclick="addToCart(<?= $key ?>)" style="display: inline-block;">
                               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
-                            <h4><?= $product['count'] ?></h4>
-                            <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delFromCart(<?= $key ?>)">
+                            <h4 style="display: inline-block; margin-right:15px;  margin-left:15px;"><?= $product['count'] ?></h4>
+                            <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delFromCart(<?= $key ?>)" style="display: inline-block;">
                               <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             </button>
-                        </div>
                     </td>
                     <td class="cart_total">
                         <p class="cart_total_price">$<?= ($product['price']*$product['count']) ?></p>
@@ -58,7 +55,7 @@ use yii\helpers\Url;
                         <h4>ВСЕГО</h4>
                     </td>
                     <td class="cart_price"></td>
-                    <td class="cart_quantity">
+                    <td style="text-align: center;">
                         <h4><?= $session['cart']['total_count'] ?></h4>
                     </td>
                     <td class="cart_total">
