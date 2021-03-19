@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Cart;
 use app\models\Product;
+use app\models\Order;
+use app\models\OrderItems;
 use yii\web\Session;
 
 class CartController extends AppController {
@@ -62,7 +64,17 @@ class CartController extends AppController {
         $session = Yii::$app->session;
         $session->open();
         
-        return $this->render('view', compact('session'));
+        $order = new Order();
+        
+        if ($order->load(Yii::$app->request->post())) {
+            $order_data = Yii::$app->request->post();
+            
+            pr ($order_data);
+        }
+        
+        $this->setMeta('E-SHOPPER | Оформление заказа');
+        
+        return $this->render('view', compact('session', 'order'));
     }
     
     
