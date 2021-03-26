@@ -68,8 +68,19 @@ class CartController extends AppController {
         
         if ($order->load(Yii::$app->request->post())) {
             $order_data = Yii::$app->request->post();
+            $order->total_count = $session['cart']['total_count'];
+            $order->total_price = $session['cart']['total_price'];
             
-            pr ($order_data);
+            if ($order->save) {
+                Yii::$app->session->setFlash('success', 'Ваш заказ принят в обработку. Для подтверждения заказа с Вами свяжется наш специалист по указанному телефону.');
+                
+                $session->remove('cart');
+                
+                return $this->refresh();
+            } else{
+                Yii::$app->session->setFlash('error', 'Проризошла какая-то ошибка, пожалуйста сообщите нам об этом.');
+            }
+            // pr ($order_data);
         }
         
         $this->setMeta('E-SHOPPER | Оформление заказа');
