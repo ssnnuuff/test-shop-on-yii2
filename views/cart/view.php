@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
                     &times;
                 </span>
             </button>
-            <?= Yii::$app->session->hasFlash('success') ?>
+            <?php echo Yii::$app->session->getFlash('success'); ?>
         </div>
     <?php endif; ?>
     
@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
                     &times;
                 </span>
             </button>
-            <?= Yii::$app->session->hasFlash('error') ?>
+            <?= Yii::$app->session->getFlash('error') ?>
         </div>
     <?php endif; ?>
     

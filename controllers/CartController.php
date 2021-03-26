@@ -68,10 +68,12 @@ class CartController extends AppController {
         
         if ($order->load(Yii::$app->request->post())) {
             $order_data = Yii::$app->request->post();
-            $order->total_count = $session['cart']['total_count'];
-            $order->total_price = $session['cart']['total_price'];
+            $order->qty = $session['cart']['total_count'];
+            $order->sum = $session['cart']['total_price'];
             
-            if ($order->save) {
+            if ($order->save()) {
+                $this->saveOrderItems($session['cart'], $order->id);
+                
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят в обработку. Для подтверждения заказа с Вами свяжется наш специалист по указанному телефону.');
                 
                 $session->remove('cart');
@@ -80,12 +82,29 @@ class CartController extends AppController {
             } else{
                 Yii::$app->session->setFlash('error', 'Проризошла какая-то ошибка, пожалуйста сообщите нам об этом.');
             }
-            // pr ($order_data);
+            
         }
         
         $this->setMeta('E-SHOPPER | Оформление заказа');
         
         return $this->render('view', compact('session', 'order'));
+    }
+    
+    protected function saveOrderItems($items, $order_id){
+        foreach ($items as $item_id => $item) {
+            if ($item_id!='total_count' && $item_id!='total_price' ) {
+                $order_item = new OrderItems();
+            
+                $order_item->order_id = $order_id;
+                $order_item->product_id = $item_id;
+                $order_item->name = $item['name'];
+                $order_item->price = $item['price'];
+                $order_item->qty_item = $item['count'];
+                $order_item->sum_item = $item['price']*$item['count'];
+                
+                $order_item->save();
+            }
+        }
     }
     
     
