@@ -76,6 +76,18 @@ class CartController extends AppController {
                 
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят в обработку. Для подтверждения заказа с Вами свяжется наш специалист по указанному телефону.');
                 
+                Yii::$app->mailer->compose('layouts/order', compact('session'))
+                    ->setTo($order->email)
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                    ->setSubject('Ваш заказ № ' . $order->id . ' с сайта testshop.ru')
+                    ->send();
+                
+                Yii::$app->mailer->compose('layouts/order', compact('session'))
+                    ->setTo(Yii::$app->params['adminEmail'])
+                    ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+                    ->setSubject('Заказ № ' . $order->id . ' с сайта testshop.ru')
+                    ->send();
+                
                 $session->remove('cart');
                 
                 return $this->refresh();
