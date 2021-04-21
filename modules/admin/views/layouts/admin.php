@@ -63,6 +63,8 @@ AppAsset::register($this);
         <br />
         <br />
         <br />
+        
+        <?php  pr(Yii::$app->user->identity); ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
