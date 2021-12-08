@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1>Заказ №<?= $model->id ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn  btn-primary-admin']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($data) {
                     return !$data->status?'<b style="color:green;">Открыт</b>':'<b style="color:red;">Закрыт</b>';
                 },
-                'format' => 'raw'
+                'format' => 'html'
             ],
             // 'status',
             'name',
@@ -74,10 +74,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <td class="description"></td>
-                    <td class="price">Price</td>
-                    <td class="quantity" style="text-align: center;">Quantity</td>
-                    <td class="total">Total</td>
+                    <td class="description">Наименование</td>
+                    <td class="price">Цена</td>
+                    <td class="quantity" style="text-align: center;">Количество</td>
+                    <td class="total">На сумму</td>
                     <td></td>
                 </tr>
             </thead>
