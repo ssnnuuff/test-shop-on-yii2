@@ -129,6 +129,7 @@ class SiteController extends Controller
     
     public function actionUser()
     {
+        // pr (Yii::$app->authManager->getRolesByUser(60));
         $user = new User();
         if (!empty(Yii::$app->request->post()['User']['username']) && !empty(Yii::$app->request->post()['User']['password'])) {
 

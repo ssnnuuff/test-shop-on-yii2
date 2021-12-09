@@ -106,8 +106,11 @@ LtAppAsset::register($this);
                                 </li>
                             <?php endif; ?>
 								<li><a class="show-cart" href=""><i class="fa fa-shopping-cart"></i> Корзина</a></li>
-								<li><a href="<?= Url::to(['/site/user']) ?>"><i class="fa fa-lock"></i> Регистрация</a></li>
-								<li><a href="<?= Url::to(['/site/login']) ?>"><i class="fa fa-lock"></i> Login</a></li>
+                                
+                                <?php if ( Yii::$app->user->isGuest ): ?>
+                                    <li><a href="<?= Url::to(['/site/user']) ?>"><i class="fa fa-lock"></i> Регистрация</a></li>
+                                    <li><a href="<?= Url::to(['/site/login']) ?>"><i class="fa fa-lock"></i> Вход</a></li>
+                                <?php endif; ?>
 							</ul>
 						</div>
 					</div>

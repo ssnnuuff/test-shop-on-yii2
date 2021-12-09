@@ -73,6 +73,10 @@ $config = [
                 '<action:(about|login|contact|user)>' => 'site/<action>',                
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['admin', 'author', 'manager'],
+        ],
     ],
     'params' => $params,
 ];
