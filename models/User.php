@@ -6,9 +6,31 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $password_repeat;
     
     public static function tableName() {
         return 'user';
+    }
+    
+    public function rules()
+    {
+        return [
+            [['username', 'password'], 'string', 'max' => 255],
+            [['username', 'password'], 'required'],
+            ['username', 'unique'],
+            ['username', 'trim'],
+            [['password', 'password_repeat'], 'validatePassword'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
+        ];
+    }
+    
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Имя пользователя',
+            'password' => 'Пароль',
+            'password_repeat' => 'Пароль ещё раз'
+        ];
     }
 
 

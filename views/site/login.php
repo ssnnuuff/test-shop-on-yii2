@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Вход';
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
-
+        
+        <div class="col-lg-offset-1 col-lg-3">
+            <a href="<?= Url::to(['site/user']) ?>">Зарегистрироваться</a>
+        </div>
+        
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
                 <?= Html::submitButton('Вход', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

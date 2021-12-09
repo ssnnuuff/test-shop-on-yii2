@@ -105,9 +105,8 @@ LtAppAsset::register($this);
                                     <a href="<?= Url::to(['/site/logout']) ?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['username'] ?> (Выход)</a>
                                 </li>
                             <?php endif; ?>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a class="show-cart" href=""><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a class="show-cart" href=""><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+								<li><a href="<?= Url::to(['/site/user']) ?>"><i class="fa fa-lock"></i> Регистрация</a></li>
 								<li><a href="<?= Url::to(['/site/login']) ?>"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>

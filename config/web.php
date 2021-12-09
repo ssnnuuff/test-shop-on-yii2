@@ -70,7 +70,7 @@ $config = [
                 'category/<id:\d+>/page/<page:\d+>' => 'category/view',
                 'category/<id:\d+>' => 'category/view',
                 'search' => 'category/search',
-                '<action:(about|login|contact)>' => 'site/<action>',                
+                '<action:(about|login|contact|user)>' => 'site/<action>',                
             ],
         ],
     ],
